@@ -1,0 +1,33 @@
+{
+  "name": "chai-jsend",
+  "version": "0.0.0",
+  "description": "Chai plugin for asserting JSend responses.",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "~1.21.4",
+    "chai": "~1.9.1"
+  },
+  "scripts": {
+    "test": "mocha",
+    "watch": "mocha -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jsdir/chai-jsend.git"
+  },
+  "keywords": [
+    "jsend",
+    "chai",
+    "assert"
+  ],
+  "author": "Jason Sommer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jsdir/chai-jsend/issues"
+  },
+  "homepage": "https://github.com/jsdir/chai-jsend"
+}
