@@ -42,8 +42,8 @@ describe('success', function() {
 ##### Usage:
 
 ```js
-describe('success', function() {
-  it('should succeed', function(done) {
+describe('failure', function() {
+  it('should fail', function(done) {
     req.get('/users/1').end(function(err, res) {
       if (err) {return done(err);}
       res.should.have.failed;
@@ -62,8 +62,8 @@ describe('success', function() {
 ##### Usage:
 
 ```js
-describe('success', function() {
-  it('should succeed', function(done) {
+describe('errors', function() {
+  it('should error', function(done) {
     req.get('/users/1').end(function(err, res) {
       if (err) {return done(err);}
       res.should.have.errored;
