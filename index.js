@@ -1,7 +1,9 @@
 chai = require('chai');
 
-function assertInclude(obj, data) {
-  chai.expect(obj).to.include(data);
+function makeAssertion(obj, flags) {
+  var assertion = chai.expect(obj);
+  if (flags.negate) {assertion = assertion.not;}
+  return assertion;
 }
 
 function clone(obj) {
@@ -16,29 +18,49 @@ function clone(obj) {
 module.exports = function(chai, utils) {
   var Assertion = chai.Assertion;
 
+  // Success
+
   Assertion.addProperty('succeeded', function() {
-    assertInclude(this._obj, {status: 'success'});
-  });
-
-  Assertion.addProperty('failed', function() {
-    assertInclude(this._obj, {status: 'fail'});
-  });
-
-  Assertion.addProperty('errored', function() {
-    assertInclude(this._obj, {status: 'error'});
+    makeAssertion(this._obj.status, this.__flags).eq('success');
   });
 
   Assertion.addMethod('succeededWith', function(data) {
-    assertInclude(this._obj, {status: 'success', data: data});
+    makeAssertion(this._obj.status, this.__flags).eq('success');
+    makeAssertion(this._obj.data, this.__flags).deep.eq(data);
+  });
+
+  // Fail
+
+  Assertion.addProperty('failed', function() {
+    makeAssertion(this._obj.status, this.__flags).eq('fail');
   });
 
   Assertion.addMethod('failedWith', function(data) {
-    assertInclude(this._obj, {status: 'fail', data: data});
+    makeAssertion(this._obj.status, this.__flags).eq('fail');
+    makeAssertion(this._obj.data, this.__flags).deep.eq(data);
+  });
+
+  // Error
+
+  Assertion.addProperty('errored', function() {
+    makeAssertion(this._obj.status, this.__flags).eq('error');
   });
 
   Assertion.addMethod('erroredWith', function(data) {
     var assertedData = clone(data);
-    assertedData.status = 'error';
-    assertInclude(this._obj, assertedData);
+    var obj = this._obj;
+    makeAssertion(obj.status, this.__flags).eq('error');
+
+    if (typeof obj.data !== 'undefined') {
+      makeAssertion(obj.data, this.__flags).deep.eq(data.data);
+    }
+
+    if (typeof obj.code !== 'undefined') {
+      makeAssertion(obj.code, this.__flags).eq(data.code);
+    }
+
+    if (typeof obj.message !== 'undefined') {
+      makeAssertion(obj.message, this.__flags).eq(data.message);
+    }
   });
 };
