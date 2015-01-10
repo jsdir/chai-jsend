@@ -15,12 +15,12 @@ module.exports = function(chai, utils) {
 
   // Success
 
-  Assertion.addProperty('succeeded', function() {
+  Assertion.addProperty('successful', function() {
     var body = getBody(this._obj);
     makeAssertion(body.status, this.__flags).eq('success');
   });
 
-  Assertion.addMethod('succeededWith', function(data) {
+  Assertion.addMethod('successfulWith', function(data) {
     var body = getBody(this._obj);
     makeAssertion(body.status, this.__flags).eq('success');
     makeAssertion(body.data, this.__flags).deep.eq(data);
@@ -28,12 +28,12 @@ module.exports = function(chai, utils) {
 
   // Fail
 
-  Assertion.addProperty('failed', function() {
+  Assertion.addProperty('failure', function() {
     var body = getBody(this._obj);
     makeAssertion(body.status, this.__flags).eq('fail');
   });
 
-  Assertion.addMethod('failedWith', function(data) {
+  Assertion.addMethod('failureWith', function(data) {
     var body = getBody(this._obj);
     makeAssertion(body.status, this.__flags).eq('fail');
     makeAssertion(body.data, this.__flags).deep.eq(data);
@@ -41,12 +41,12 @@ module.exports = function(chai, utils) {
 
   // Error
 
-  Assertion.addProperty('errored', function() {
+  Assertion.addProperty('error', function() {
     var body = getBody(this._obj)
     makeAssertion(body.status, this.__flags).eq('error');
   });
 
-  Assertion.addMethod('erroredWith', function(data) {
+  Assertion.addMethod('errorWith', function(data) {
     var body = getBody(this._obj);
     makeAssertion(body.status, this.__flags).eq('error');
 

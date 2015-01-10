@@ -19,54 +19,54 @@ describe('chai-jsend', function() {
     error: {body: responseBodies.error}
   };
 
-  it('should check if response succeeds', function() {
-    responses.success.should.have.succeeded;
-    responseBodies.success.should.have.succeeded;
+  it('should check if response is successful', function() {
+    responses.success.should.be.successful;
+    responseBodies.success.should.be.successful;
 
-    responses.fail.should.not.have.succeeded;
-    responseBodies.fail.should.not.have.succeeded;
+    responses.fail.should.not.be.successful;
+    responseBodies.fail.should.not.be.successful;
 
-    responses.error.should.not.have.succeeded;
-    responseBodies.error.should.not.have.succeeded;
+    responses.error.should.not.be.successful;
+    responseBodies.error.should.not.be.successful;
   });
 
-  it('should check if response succeeds with data', function() {
-    responses.success.should.have.succeededWith(data);
-    responseBodies.success.should.have.succeededWith(data);
+  it('should check if response is successful with data', function() {
+    responses.success.should.be.successfulWith(data);
+    responseBodies.success.should.be.successfulWith(data);
   });
 
-  it('should check if response fails', function() {
-    responses.success.should.not.have.failed;
-    responseBodies.success.should.not.have.failed;
+  it('should check if response is failure', function() {
+    responses.success.should.not.be.failure;
+    responseBodies.success.should.not.be.failure;
 
-    responses.fail.should.have.failed;
-    responseBodies.fail.should.have.failed;
+    responses.fail.should.be.failure;
+    responseBodies.fail.should.be.failure;
 
-    responses.error.should.not.have.failed;
-    responseBodies.error.should.not.have.failed;
+    responses.error.should.not.be.failure;
+    responseBodies.error.should.not.be.failure;
   });
 
-  it('should check if response fails with data', function() {
-    responses.fail.should.have.failedWith(data);
-    responseBodies.fail.should.have.failedWith(data);
+  it('should check if response is failure with data', function() {
+    responses.fail.should.be.failureWith(data);
+    responseBodies.fail.should.be.failureWith(data);
   });
 
-  it('should check if response errors', function() {
-    responses.success.should.not.have.errored;
-    responseBodies.success.should.not.have.errored;
+  it('should check if response is error', function() {
+    responses.success.should.not.be.error;
+    responseBodies.success.should.not.be.error;
 
-    responses.fail.should.not.have.errored;
-    responseBodies.fail.should.not.have.errored;
+    responses.fail.should.not.be.error;
+    responseBodies.fail.should.not.be.error;
 
-    responses.error.should.have.errored;
-    responseBodies.error.should.have.errored;
+    responses.error.should.be.error;
+    responseBodies.error.should.be.error;
   });
 
-  it('should check if response errors with data', function() {
+  it('should check if response is error with data', function() {
     var errorData = {data: data, message: 'message', code: 404};
-    responses.error.should.have.erroredWith('message');
-    responseBodies.error.should.have.erroredWith('message');
-    responses.error.should.have.erroredWith(errorData);
-    responseBodies.error.should.have.erroredWith(errorData);
+    responses.error.should.be.errorWith('message');
+    responseBodies.error.should.be.errorWith('message');
+    responses.error.should.be.errorWith(errorData);
+    responseBodies.error.should.be.errorWith(errorData);
   });
 });
